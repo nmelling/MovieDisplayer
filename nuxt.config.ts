@@ -1,14 +1,22 @@
-import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
+import vuetify, { transformAssetUrls, } from "vite-plugin-vuetify";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  modules: ["@nuxt/a11y", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/eslint",],
+  devtools: { enabled: true, },
+  css: ["~/assets/css/main.css",],
   build: {
-    transpile: ["vuetify"],
+    transpile: ["vuetify",],
   },
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
-  modules: ["@nuxt/a11y", "@pinia/nuxt", "@vueuse/nuxt"],
-  css: ["~/assets/css/main.css"],
+  vite: {
+    plugins: [vuetify({ autoImport: true, },),],
+    vue: {
+      template: {
+        transformAssetUrls,
+      },
+    },
+  },
   a11y: {
     enabled: true,
     defaultHighlight: true,
@@ -18,12 +26,9 @@ export default defineNuxtConfig({
       runOptions: {},
     },
   },
-  vite: {
-    plugins: [vuetify({ autoImport: true })],
-    vue: {
-      template: {
-        transformAssetUrls,
-      },
+  eslint: {
+    config: {
+      stylistic: true,
     },
   },
-});
+},);
