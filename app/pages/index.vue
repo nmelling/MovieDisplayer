@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import MoviesList from "~/components/moviesList.vue";
 
-const store = useMoviesStore();
-if (!store.hydrated) {
-  await store.fetch(true);
-}
+const { movies, pending } = await useListMovies();
 </script>
 
 <template>
@@ -13,14 +10,14 @@ if (!store.hydrated) {
       Liste des films
     </h1>
     <v-progress-circular
-      v-show="store.pending"
+      v-show="pending"
       indeterminate
       color="primary"
       aria-label="movies list loading"
     />
   </header>
   <v-container>
-    <MoviesList :movies="store.movies" />
+    <MoviesList :movies="movies" />
   </v-container>
 </template>
 
