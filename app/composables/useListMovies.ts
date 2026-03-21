@@ -22,7 +22,7 @@ export async function useListMovies() {
       if (!res?.results || res.results.length === 0) return;
       const existingIds = new Set(movies.value.map(movie => movie.id));
       movies.value.push(...res.results.filter(movie => !existingIds.has(movie.id)));
-      noMoreResults.value = res.total_results > movies.value.length;
+      noMoreResults.value = res.total_results <= movies.value.length;
     }
     catch(err) {
       error.value = ensureError(err).message;
