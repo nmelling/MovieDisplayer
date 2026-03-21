@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import type { TMDB } from "tmdb-ts";
-
-type Movies = Awaited<ReturnType<TMDB["movies"]["popular"]>>["results"];
-
 defineProps<{
   movies: Movies
 }>();

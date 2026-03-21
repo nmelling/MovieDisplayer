@@ -1,6 +1,6 @@
-import type { TMDB } from "tmdb-ts";
+// import type { TMDB } from "tmdb-ts";
 
-type Movies = Awaited<ReturnType<TMDB["movies"]["popular"]>>["results"];
+// type Movies = Awaited<ReturnType<TMDB["movies"]["popular"]>>["results"];
 
 export async function useListMovies() {
   const page = useState("page", () => 1);
