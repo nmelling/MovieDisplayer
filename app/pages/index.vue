@@ -1,7 +1,17 @@
 <script setup lang="ts">
 import MoviesList from "~/components/moviesList.vue";
 
-const { movies, pending } = await useListMovies();
+const { movies, pending, error, noMoreResults, setNextPage, retry } = await useListMovies();
+
+async function onFetchRequested(doneCb: DoneCallback) {
+  // Si on est en erreur, on retente le fetch sur la même page
+  if (error.value) await retry();
+  else await setNextPage();
+
+  if (error.value) doneCb("error");
+  else if (noMoreResults.value) doneCb("empty");
+  else doneCb("ok");
+}
 </script>
 
 <template>
@@ -13,11 +23,15 @@ const { movies, pending } = await useListMovies();
       v-show="pending"
       indeterminate
       color="primary"
-      aria-label="movies list loading"
+      aria-label="Chargement des films"
     />
   </header>
   <v-container>
-    <MoviesList :movies="movies" />
+    <MoviesList
+      :movies="movies"
+      :error="error"
+      @fetch-requested="onFetchRequested"
+    />
   </v-container>
 </template>
 
