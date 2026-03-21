@@ -1,5 +1,4 @@
 import type { TMDB } from "tmdb-ts";
-import { ensureError } from "~/lib/error.lib";
 
 type Movies = Awaited<ReturnType<TMDB["movies"]["popular"]>>["results"];
 
