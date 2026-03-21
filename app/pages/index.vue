@@ -15,26 +15,27 @@ async function onFetchRequested(doneCb: DoneCallback) {
 </script>
 
 <template>
-  <header class="flex items-center justify-center">
-    <h1 class="mx-2">
-      Liste des films
-    </h1>
-    <v-progress-circular
-      v-show="pending"
-      indeterminate
-      color="primary"
-      aria-label="Chargement des films"
-    />
-  </header>
-  <v-container>
-    <MoviesList
-      :movies="movies"
-      :error="error"
-      @fetch-requested="onFetchRequested"
-    />
+  <v-container class="min-h-dvh flex flex-col">
+    <header class="sticky-header flex items-center justify-center bg-white">
+      <h1 class="mx-2">
+        Liste des films
+      </h1>
+      <v-progress-circular
+        v-show="pending"
+        indeterminate
+        color="primary"
+        aria-label="Chargement des films"
+      />
+    </header>
+    <v-container class="flex-1 overflow-y-auto ">
+      <MoviesList
+        :movies="movies"
+        :error="error"
+        @fetch-requested="onFetchRequested"
+      />
+    </v-container>
   </v-container>
 </template>
 
-<style>
-
+<style lang="scss">
 </style>

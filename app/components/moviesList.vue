@@ -17,14 +17,38 @@ function onLoad(e: LoadEvent) {
   <v-infinite-scroll
     @load="onLoad"
   >
-    <template
+    <v-list-item
       v-for="(movie, index) in movies"
-      :key="movie.id"
+      :key="movie.title"
+      :title="movie.title"
+      :subtitle="formatDate(movie.release_date)"
+      :to="goToMovie(movie.id)"
+      link
+      class="px-2 rounded-lg hover:bg-surface"
+      :class="index % 2 === 0 ? 'bg-surface-variant' : 'bg-surface'"
     >
-      <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
-        {{ movie }}
-      </div>
-    </template>
+      <template #prepend>
+        <v-avatar size="x-large">
+          <v-img
+            :alt="`${movie.title}_poster_img`"
+            :src="`https://image.tmdb.org/t/p/w200/${movie.poster_path}`"
+          />
+        </v-avatar>
+      </template>
+      <template #subtitle>
+        <span
+          class="text-on-surface-variant text-body-2"
+        >
+          {{ formatDate(movie.release_date) }}
+        </span>
+      </template>
+      <template #append>
+        <v-icon
+          icon="mdi-open-in-new"
+          size="large"
+        />
+      </template>
+    </v-list-item>
     <template #loading>
       <v-progress-circular
         indeterminate

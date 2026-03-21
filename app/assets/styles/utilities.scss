@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+.sticky-header {
+  @apply sticky top-0 z-10 border-b;
+}
