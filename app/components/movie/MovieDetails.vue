@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <v-container class="MovieDetails py-6">
+  <v-container class="MovieDetails">
     <v-row density="comfortable">
       <v-col
         cols="12"
@@ -13,6 +13,7 @@ defineProps<{
       >
         <v-card class="overflow-hidden rounded-xl">
           <v-img
+            :lazy-src="formatSrcImg(movie.poster_path ?? movie.backdrop_path)"
             :src="formatSrcImg(movie.poster_path ?? movie.backdrop_path)"
             :alt="movie.title"
             class="poster-img"
@@ -61,7 +62,7 @@ defineProps<{
               half-increments
               readonly
               size="18"
-              color="orange-lighten-1"
+              color="warning"
             />
             <span class="text-sm">
               {{ movie.vote_average }} / 10
@@ -84,13 +85,17 @@ defineProps<{
             <h2 class="text-lg font-semibold mb-2">
               Acteurs
             </h2>
-            <div class="overflow-x-auto flex flex-nowrap gap-2">
+            <div
+              class="overflow-x-auto flex flex-nowrap gap-2"
+              tabindex="0"
+            >
               <v-card
                 v-for="actor of movie.cast"
                 :key="actor.id"
                 class="min-w-[150px] max-w-[150px] flex-shrink-0"
               >
                 <v-img
+                  :lazy-src="formatSrcImg(actor.profile_path)"
                   :src="formatSrcImg(actor.profile_path)"
                   :alt="actor.name"
                   height="200"
