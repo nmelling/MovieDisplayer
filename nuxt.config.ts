@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     }
   },
   css: [
+    "@/assets/styles/layers.css",
     "vuetify/styles",
     "@/assets/styles/tailwind.css",
     "@/assets/styles/utilities.scss",
@@ -26,7 +27,15 @@ export default defineNuxtConfig({
   },
   compatibilityDate: "2025-07-15",
   vite: {
-    plugins: [vuetify({ autoImport: true })],
+    plugins: [vuetify({
+      autoImport: true
+    })],
+    optimizeDeps: {
+      include: [
+        "date-fns",
+        "date-fns/locale",
+      ]
+    },
     vue: {
       template: {
         transformAssetUrls,
@@ -38,7 +47,6 @@ export default defineNuxtConfig({
       "@tailwindcss/postcss": {},
     },
   },
-
   a11y: {
     enabled: true,
     defaultHighlight: true,
