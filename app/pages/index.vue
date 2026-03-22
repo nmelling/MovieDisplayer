@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import MoviesList from "~/components/moviesList.vue";
-
 const {
   movies,
   loading,

@@ -22,6 +22,7 @@ const { data, error } = await useAsyncData(
     </template>
     <template v-else-if="data">
       <MovieDetails :movie="data" />
+      <MovieComments />
     </template>
   </v-container>
 </template>
