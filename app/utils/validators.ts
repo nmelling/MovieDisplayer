@@ -12,6 +12,7 @@ import {
 
 export const alpha$ = helpers.withMessage("Caractères alphabétiques uniquement", alpha);
 export const alphaNum$ = helpers.withMessage("Caractères alphanumériques uniquement", alphaNum);
+export const alphaNumSpaces$ = helpers.withMessage("Caractères alphanumériques uniquement", helpers.regex(/^[a-zA-Z0-9\s]*$/));
 export const numeric$ = helpers.withMessage("Nombre uniquement", numeric);
 export const required$ = helpers.withMessage("Champ requis", required);
 export const minLength$ = (nb: number) => helpers.withMessage(`Minimum ${nb} caractères`, minLength(nb));

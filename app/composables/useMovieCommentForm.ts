@@ -19,7 +19,7 @@ export function useMovieCommentForm() {
       required: required$,
     },
     message: {
-      alphaNum: alphaNum$,
+      alphaNum: alphaNumSpaces$,
       minLength: minLength$(3),
       maxLength: maxLength$(500),
       required: required$,
