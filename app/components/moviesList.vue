@@ -19,7 +19,7 @@ function onLoad(e: LoadEvent) {
   >
     <v-list-item
       v-for="(movie, index) in movies"
-      :key="movie.title"
+      :key="movie.id"
       :title="movie.title"
       :subtitle="formatDate(movie.release_date)"
       :to="goToMovie(movie.id)"
