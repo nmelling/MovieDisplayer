@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
 
-const { data, error } = await useAsyncData(
+const { data: movie, error } = await useAsyncData(
   () => $fetch("/api/movies/findOne", {
     query: {
       id: route.params.id,
@@ -15,15 +15,19 @@ const { data, error } = await useAsyncData(
 
 <template>
   <v-container>
-    <template v-if="error">
-      <div class="flex h-full w-full justify-center items-center">
-        Une erreur est survenue au chargement de la donnée.
-      </div>
-    </template>
-    <template v-else-if="data">
-      <MovieDetails :movie="data" />
+    <div
+      v-if="error"
+      class="flex h-full w-full justify-center items-center"
+    >
+      Une erreur est survenue au chargement de la donnée.
+    </div>
+    <v-row
+      v-else-if="movie"
+      density="comfortable"
+    >
+      <MovieDetails :movie="movie" />
       <MovieComments />
-    </template>
+    </v-row>
   </v-container>
 </template>
 

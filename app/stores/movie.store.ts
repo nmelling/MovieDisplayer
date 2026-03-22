@@ -1,15 +1,25 @@
 import { defineStore } from "pinia";
 
-type Comment = {
-  username: string
-  message: string
-  rating: number
-};
-
 export const useMovieCommentsStore = defineStore("movie-comments", () => {
-  const comments = ref<Comment[]>([]);
+  const storedComments = ref<MovieComment[]>([]);
+
+  function storeComment(form: MovieCommentForm) {
+    storedComments.value.push({
+      ...form,
+      createdTs: Date.now(),
+      uuid: crypto.randomUUID(),
+    });
+  }
+
+  const sortedComments = computed(() => storedComments.value.toSorted((A, B) => A.createdTs - B.createdTs));
 
   return {
-    comments,
+    comments: sortedComments,
+    storedComments,
+    storeComment,
   };
-}, { persist: true });
+},
+{
+  persist: true,
+}
+);

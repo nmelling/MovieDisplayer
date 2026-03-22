@@ -20,3 +20,12 @@ export type MovieDetails = {
   cast: MovieCredits["cast"]
   director: MovieCredits["crew"][number] | undefined
 };
+
+export type MovieComment = {
+  username: string
+  message: string
+  rating: number
+  createdTs: number
+  uuid: string
+};
+export type MovieCommentForm = Omit<MovieComment, "uuid" | "createdTs">;
