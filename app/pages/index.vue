@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import MoviesList from "~/components/moviesList.vue";
 
-const { movies, pending, error, noMoreResults, setNextPage, retry } = await useListMovies();
+const {
+  movies,
+  loading,
+  error,
+  noMoreResults,
+  setNextPage,
+  setSearchQuery,
+  retry,
+} = await useListMovies();
 
 async function onFetchRequested(doneCb: DoneCallback) {
   // Si on est en erreur, on retente le fetch sur la même page
@@ -12,6 +20,16 @@ async function onFetchRequested(doneCb: DoneCallback) {
   else if (noMoreResults.value) doneCb("empty");
   else doneCb("ok");
 }
+
+const searchQuery = ref("");
+const DEBOUNCE_MS_DELAY = 700;
+
+const debouncedSetSearch = useDebounceFn(
+  () => setSearchQuery(searchQuery.value),
+  DEBOUNCE_MS_DELAY,
+);
+
+watch(searchQuery, debouncedSetSearch);
 </script>
 
 <template>
@@ -22,12 +40,19 @@ async function onFetchRequested(doneCb: DoneCallback) {
           Liste des films
         </h1>
         <v-progress-circular
-          v-show="pending"
+          v-show="loading"
           indeterminate
           color="primary"
           aria-label="Chargement des films"
         />
       </div>
+      <v-text-field
+        v-model="searchQuery"
+        label="Rechercher un film"
+        variant="underlined"
+        prepend-icon="mdi-magnify"
+        clearable
+      />
     </header>
     <v-container class="flex-1 overflow-y-auto ">
       <MoviesList
