@@ -26,6 +26,7 @@
     "@vueuse/nuxt": "14.2.1",
     "date-fns": "^4.1.0",
     "nuxt": "4.4.2",
+    "pinia-plugin-persistedstate": "^4.7.1",
     "sass": "1.98.0",
     "tailwindcss": "4.2.2",
     "tmdb-ts": "2.3.0",
