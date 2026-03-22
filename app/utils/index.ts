@@ -12,3 +12,7 @@ export function formatDate(date: string) {
   if (!date) return date;
   return format(new Date(date), "dd/MM/yyyy", { locale: fr });
 }
+
+export function formatSrcImg(path: string) {
+  return `https://image.tmdb.org/t/p/w200/${path}`;
+}

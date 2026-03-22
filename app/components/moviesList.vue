@@ -31,7 +31,7 @@ function onLoad(e: LoadEvent) {
         <v-avatar size="x-large">
           <v-img
             :alt="`${movie.title}_poster_img`"
-            :src="`https://image.tmdb.org/t/p/w200/${movie.poster_path}`"
+            :src="formatSrcImg(movie.poster_path)"
           />
         </v-avatar>
       </template>
