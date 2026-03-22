@@ -26,7 +26,7 @@ const { data: movie, error } = await useAsyncData(
       density="comfortable"
     >
       <MovieDetails :movie="movie" />
-      <MovieComments />
+      <MovieComments :movie-id="movie.id" />
     </v-row>
   </v-container>
 </template>

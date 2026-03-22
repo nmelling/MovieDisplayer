@@ -27,5 +27,6 @@ export type MovieComment = {
   rating: number
   createdTs: number
   uuid: string
+  movieId: number
 };
-export type MovieCommentForm = Omit<MovieComment, "uuid" | "createdTs">;
+export type MovieCommentForm = Omit<MovieComment, "uuid" | "createdTs" | "movieId">;

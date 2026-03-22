@@ -1,6 +1,12 @@
 <script setup lang="ts">
+const { movieId } = defineProps<{
+  movieId: number
+}>();
+
 const { form, reset, v$, getErrorMessages } = useMovieCommentForm();
-const { comments, storeComment } = useMovieCommentsStore();
+const { commentsByMovie, storeComment } = useMovieCommentsStore();
+
+const comments = commentsByMovie(movieId);
 
 function onClickReset() {
   reset();
@@ -12,7 +18,7 @@ function onSubmit() {
   if (!isValid) {
     return;
   }
-  storeComment(form.value);
+  storeComment(form.value, movieId);
   onClickReset();
 }
 </script>
