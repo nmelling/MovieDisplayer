@@ -9,25 +9,26 @@ export function useMovieCommentForm() {
     };
   }
 
-  const form = useState<MovieCommentForm>(() => makeBlankForm());
+  const form = useState<MovieCommentForm>("movie-comment-form", () => makeBlankForm());
 
   const rules = computed(() => ({
     username: {
-      alpha: alpha$,
+      alpha: alpha$(),
       minLength: minLength$(3),
       maxLength: maxLength$(50),
-      required: required$,
+      required: required$(),
     },
     message: {
-      alphaNum: alphaNumSpaces$,
+      alphaNum: alphaNumSpaces$(),
       minLength: minLength$(3),
       maxLength: maxLength$(500),
-      required: required$,
+      required: required$(),
     },
     rating: {
-      numeric: numeric$,
+      numeric: numeric$(),
       minValue: minValue$(0),
       maxValue: maxValue$(10),
+      required: required$(),
     },
   }));
 
