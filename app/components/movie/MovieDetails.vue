@@ -6,49 +6,62 @@ defineProps<{
 
 <template>
   <v-card class="pad-5 rounded-xl movie-card w-full">
-    <header class="mb-3">
-      <h1 class="text-3xl font-bold mb-0">
-        {{ movie.title }}
-      </h1>
+    <v-row>
+      <v-col cols="4">
+        <v-img
+          :src="formatSrcImg(movie.poster_path ?? movie.backdrop_path)"
+          :lazy-src="formatSrcImg(movie.poster_path ?? movie.backdrop_path)"
+          :alt="movie.title"
+          class="poster-img rounded-md"
+          height="250"
+        />
+      </v-col>
+      <v-col>
+        <header class="mb-3">
+          <h1 class="text-3xl font-bold mb-0">
+            {{ movie.title }}
+          </h1>
 
-      <section class="flex flex-wrap gap-2">
-        <div class="flex flex-wrap gap-2 text-sm opacity-80">
-          <span>{{ formatDate(movie.release_date) }}</span>
-          <span>•</span>
-          <span>{{ movie.runtime }} min</span>
-        </div>
-        <div class="font-weight-bold">
-          Directeur: {{ movie.director?.name ?? 'N/C' }}
-        </div>
-      </section>
+          <section class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 text-sm opacity-80">
+              <span>{{ formatDate(movie.release_date) }}</span>
+              <span>•</span>
+              <span>{{ movie.runtime }} min</span>
+            </div>
+            <div class="font-weight-bold">
+              Directeur: {{ movie.director?.name ?? 'N/C' }}
+            </div>
+          </section>
 
-      <section class="flex flex-wrap gap-2">
-        <v-chip
-          v-for="genre in movie.genres"
-          :key="genre.id"
-          size="small"
-          variant="tonal"
-        >
-          {{ genre.name }}
-        </v-chip>
-      </section>
-    </header>
+          <section class="flex flex-wrap gap-2">
+            <v-chip
+              v-for="genre in movie.genres"
+              :key="genre.id"
+              size="small"
+              variant="tonal"
+            >
+              {{ genre.name }}
+            </v-chip>
+          </section>
 
-    <div class="flex items-center gap-2 mb-5">
-      <v-rating
-        :model-value="movie.vote_average / 2"
-        half-increments
-        readonly
-        size="18"
-        color="warning"
-      />
-      <span class="text-sm">
-        {{ movie.vote_average }} / 10
-      </span>
-      <span class="text-xs opacity-60">
-        ({{ movie.vote_count }} votes)
-      </span>
-    </div>
+          <section class="flex items-center gap-2 mb-5">
+            <v-rating
+              :model-value="movie.vote_average / 2"
+              half-increments
+              readonly
+              size="18"
+              color="warning"
+            />
+            <span class="text-sm">
+              {{ movie.vote_average }} / 10
+            </span>
+            <span class="text-xs opacity-60">
+              ({{ movie.vote_count }} votes)
+            </span>
+          </section>
+        </header>
+      </v-col>
+    </v-row>
 
     <section class="mb-6">
       <h2 class="text-lg font-semibold mb-2">
