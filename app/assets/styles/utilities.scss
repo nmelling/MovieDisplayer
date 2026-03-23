@@ -3,3 +3,16 @@
 .sticky-header {
   @apply sticky top-0 z-10;
 }
+
+// Pour l'instant, pas réussi à résoudre le problème d'application de certaines classes tailwind
+.pad-5 {
+  @apply p-5
+}
+
+.pad-2 {
+  @apply p-2
+}
+
+.gap-2 {
+  @apply gap-2
+}

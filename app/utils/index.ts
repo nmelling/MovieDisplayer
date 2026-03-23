@@ -8,7 +8,7 @@ export function ensureError(err: unknown) {
   return new Error(String(err));
 }
 
-export function formatDate(date: string) {
+export function formatDate(date: string | number) {
   if (!date) return date;
   return format(new Date(date), "dd/MM/yyyy", { locale: fr });
 }
