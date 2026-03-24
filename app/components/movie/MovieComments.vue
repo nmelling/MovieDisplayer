@@ -11,14 +11,14 @@ const comments = commentsByMovie(movieId);
 <template>
   <v-container>
     <h2 class="text-center">
-      Commentaires({{ comments.length }})
+      Commentaires ({{ comments.length }})
     </h2>
     <v-list
       :items="comments"
       lines="three"
     >
       <template #title="props">
-        <div class="flex items-center gap-2">
+        <div class="flex items-center tgap-2">
           <v-rating
             :model-value="props.item.rating"
             half-increments

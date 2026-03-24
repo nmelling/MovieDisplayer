@@ -5,6 +5,7 @@
 }
 
 // Pour l'instant, pas réussi à résoudre le problème d'application de certaines classes tailwind
+// Solution simple par manque de temps
 .pad-5 {
   @apply p-5
 }
@@ -13,6 +14,6 @@
   @apply p-2
 }
 
-.gap-2 {
+.tgap-2 {
   @apply gap-2
 }

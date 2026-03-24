@@ -1,4 +1,9 @@
-export async function useListMovies() {
+// Utilisation de useState pour un comportement SSR-friendly
+// Le composable a un state partagé si différents appelants
+// Ok ici car utilisé pour une seule page/par un seul composant
+// Architecture à approfondir si la question se pose d'être utilisé par différents composants avec des états indépendants
+
+export function useListMovies() {
   const page = useState("page", () => 1);
   const pending = useState("pending", () => false);
   const error = useState("error", () => "");
@@ -85,8 +90,6 @@ export async function useListMovies() {
     else await fetchPopular();
   }
 
-  await callOnce(fetchMovies);
-
   async function setNextPage() {
     const newPage = page.value + 1;
     if (newPage >= totalPages.value) return;
@@ -96,6 +99,11 @@ export async function useListMovies() {
 
   // On défini clairement l'intention donné
   async function retry() {
+    await fetchMovies();
+  }
+
+  // On défini clairement l'intention donné
+  async function init() {
     await fetchMovies();
   }
 
@@ -116,6 +124,7 @@ export async function useListMovies() {
     setNextPage,
     setSearchQuery,
     retry,
+    init,
     movies,
     loading,
     error,

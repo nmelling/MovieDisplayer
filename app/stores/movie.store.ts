@@ -1,5 +1,3 @@
-import { defineStore } from "pinia";
-
 export const useMovieCommentsStore = defineStore("movie-comments", () => {
   const storedComments = ref<MovieComment[]>([]);
 

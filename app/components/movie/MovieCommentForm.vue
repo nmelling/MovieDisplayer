@@ -39,9 +39,9 @@ function onSubmit() {
         :error-messages="getErrorMessages('username')"
         @blur="v$.username.$touch()"
       />
-      <section class="flex items-center flex-nowrap gap-2">
+      <section class="flex items-center flex-nowrap tgap-2">
         <div class="opacity-80">
-          ({{ form.rating }})
+          ({{ form.rating * 2 }})
         </div>
         <v-rating
           v-model="form.rating"
