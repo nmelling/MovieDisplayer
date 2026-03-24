@@ -1,7 +1,11 @@
 @reference "tailwindcss";
 
-.sticky-header {
-  @apply sticky top-0 z-10;
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.1);
 }
 
 // Pour l'instant, pas réussi à résoudre le problème d'application de certaines classes tailwind

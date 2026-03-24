@@ -6,7 +6,7 @@ type MovieCredits = Awaited<ReturnType<TMDB["movies"]["credits"]>>;
 // Obligé de typer manuellement car
 // Awaited<ReturnType<TMDB["movies"]["details"]>>
 // Expression produces a union type that is too complex to represent.
-// et pas la priorité à fixer pour avancer sur els autres points
+// Pas la priorité à fixer pour avancer sur els autres points
 export type MovieDetails = {
   poster_path?: string
   backdrop_path: string

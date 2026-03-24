@@ -10,6 +10,7 @@ import {
   helpers,
 } from "@vuelidate/validators";
 
+// On exporte les messages afin de pouvoir s'en resservir notamment dans les tests unitaires
 export const errorMessage = {
   alpha$: () => "Caractères alphabétiques uniquement",
   alphaNum$: () => "Caractères alphanumériques uniquement",
@@ -22,6 +23,7 @@ export const errorMessage = {
   maxValue$: (nb: number) => `Valeur maximum: ${nb}`,
 } as const;
 
+// On défini des messages d'erreurs customs
 export const alpha$ = () => helpers.withMessage(errorMessage.alpha$(), alpha);
 export const alphaNum$ = () => helpers.withMessage(errorMessage.alphaNum$(), alphaNum);
 export const alphaNumSpaces$ = () => helpers.withMessage(errorMessage.alphaNumSpaces$(), helpers.regex(/^[a-zA-Z0-9\s]*$/));

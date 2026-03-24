@@ -47,6 +47,9 @@ function resetListMoviesState() {
   useState<AbortController | null>("controller", () => null).value = null;
 }
 
+// On génère un helper permettant de contrôler précisément le moment
+// où l'appel asynchrone est rendu (succcès ou erreur)
+// (Utilisation en partie de l'IA pour optimiser la création de ce helper)
 function createDeferred<T>() {
   let resolve: (value: T) => void;
   let reject: (reason?: unknown) => void;
@@ -141,8 +144,7 @@ describe("useListMovies", () => {
   describe("Search query", () => {
     it("Non empty should call specific search endpoint with page set to 1", async() => {
       fetchMock
-        .mockResolvedValueOnce(makeResponse([makeMovie(1)], 3, 10))
-        .mockResolvedValueOnce(makeResponse([makeMovie(2)], 2, 2));
+        .mockResolvedValueOnce(makeResponse([makeMovie(1)], 3, 10));
 
       const { setSearchQuery } = useListMovies();
       await setSearchQuery("batman");
@@ -158,7 +160,6 @@ describe("useListMovies", () => {
 
     it("Non empty & set next page should use search endpoint with next page", async() => {
       fetchMock
-        .mockResolvedValueOnce(makeResponse([makeMovie(1)], 3, 10))
         .mockResolvedValueOnce(makeResponse([makeMovie(2)], 3, 10))
         .mockResolvedValueOnce(makeResponse([makeMovie(3)], 3, 10));
 
@@ -177,7 +178,6 @@ describe("useListMovies", () => {
 
     it("Non empty & retry should use search endpoint on same page", async() => {
       fetchMock
-        .mockResolvedValueOnce(makeResponse([makeMovie(1)], 3, 10))
         .mockResolvedValueOnce(makeResponse([makeMovie(2)], 3, 10))
         .mockResolvedValueOnce(makeResponse([makeMovie(3)], 3, 10))
         .mockResolvedValueOnce(makeResponse([makeMovie(4)], 3, 10));
@@ -198,23 +198,28 @@ describe("useListMovies", () => {
 
     it("Empty query should reset state & list all movies with page set to 1", async() => {
       fetchMock
-        .mockResolvedValueOnce(makeResponse([makeMovie(1)], 3, 10))
-        .mockResolvedValueOnce(makeResponse([makeMovie(2)], 3, 10))
-        .mockResolvedValueOnce(makeResponse([makeMovie(3)], 3, 10));
+        .mockResolvedValueOnce(makeResponse([makeMovie(1)], 3, 10));
 
       const { setSearchQuery, movies, error, noMoreResults } = useListMovies();
       await setSearchQuery("batman");
 
-      const deferred = createDeferred<FetchResponse>();
-      fetchMock.mockImplementationOnce(() => deferred.promise);
+      // On génère une requête popular qui est mise 'en attente'
+      const deferredPopular = createDeferred<FetchResponse>();
+      // Le prochain appel API sera celui de la requête de recherche vide, donc sur popular
+      fetchMock.mockImplementationOnce(() => deferredPopular.promise);
 
+      // On reset la recherche
       const resetPromise = setSearchQuery("");
 
+      // On vérifie que le reset des datas est immédiat
+      // et exécuté avant l'appel API sur popular
       expect(movies.value).toEqual([]);
       expect(error.value).toBe("");
       expect(noMoreResults.value).toBe(false);
 
-      deferred.resolve(makeResponse([makeMovie(3)], 1, 1));
+      // On simule la réponse serveur qui résout l'appel
+      deferredPopular.resolve(makeResponse([makeMovie(3)], 1, 1));
+      // On garanti que le traitement post appel au sein de la fonction est terminé
       await resetPromise;
 
       expect(fetchMock).toHaveBeenLastCalledWith("/api/movies/popular", {

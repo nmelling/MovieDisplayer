@@ -1,7 +1,8 @@
 // Utilisation de useState pour un comportement SSR-friendly
 // Le composable a un state partagé si différents appelants
 // Ok ici car utilisé pour une seule page/par un seul composant
-// Architecture à approfondir si la question se pose d'être utilisé par différents composants avec des états indépendants
+// Architecture à approfondir si la question se pose d'être utilisé
+// par différents composants avec des états indépendants
 
 export function useListMovies() {
   const page = useState("page", () => 1);
@@ -10,6 +11,8 @@ export function useListMovies() {
   const movies = useState<Movies>("movies", () => []);
   const totalPages = useState("totalPages", () => 1);
   const noMoreResults = useState("noMoreResults", () => false);
+  // Songer à stocker search en query params
+  // pour permettre un refresh de page avec la variable déjà définie
   const search = useState("search", () => "");
   const controller = useState<AbortController | null>("controller", () => null);
 
@@ -30,7 +33,8 @@ export function useListMovies() {
   }
 
   async function searchMovies() {
-    // Si la requête n'est pas la plus récente, alors on annule les précédentes
+    // Si une requête est déjà en cours d'exécution,
+    // alors on annule la précédente pour être sûr que les résultats soient cohérents
     if (controller.value) controller.value.abort();
     controller.value = new AbortController();
 
@@ -61,6 +65,8 @@ export function useListMovies() {
   }
 
   async function fetchPopular() {
+    // Comme l'utilisation est correlée à l'infinite scroll
+    // on attend le chargement de la page précédente
     if (pending.value) return;
     try {
       pending.value = true;
@@ -84,6 +90,7 @@ export function useListMovies() {
     pending.value = false;
   }
 
+  // On utilise un seul point d'entrée afin de faciliter l'appel des consommateurs
   async function fetchMovies() {
     error.value = "";
     if (search.value) await searchMovies();
