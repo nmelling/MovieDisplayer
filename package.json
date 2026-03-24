@@ -11,9 +11,7 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "prepare": "husky",
-    "test": "vitest",
-    "test:nuxt": "vitest --project nuxt",
-    "test:unit": "vitest --project unit"
+    "test": "vitest"
   },
   "lint-staged": {
     "*.{js,mjs,ts,vue}": [
