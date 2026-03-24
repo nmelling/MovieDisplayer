@@ -9,7 +9,10 @@ const {
   retry,
   init,
 } = useListMovies();
-await init();
+
+onServerPrefetch(async() => {
+  await init();
+});
 
 async function onFetchRequested(doneCb: DoneCallback) {
   // Si on est en erreur, on retente le fetch sur la même page
