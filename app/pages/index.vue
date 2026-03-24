@@ -7,7 +7,9 @@ const {
   setNextPage,
   setSearchQuery,
   retry,
-} = await useListMovies();
+  init,
+} = useListMovies();
+await init();
 
 async function onFetchRequested(doneCb: DoneCallback) {
   // Si on est en erreur, on retente le fetch sur la même page
