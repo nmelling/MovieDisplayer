@@ -2,7 +2,14 @@ import vuetify, { transformAssetUrls } from "vite-plugin-vuetify";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxt/a11y", "@pinia/nuxt", "@vueuse/nuxt", "@nuxt/eslint"],
+  modules: [
+    "@nuxt/a11y",
+    "@nuxt/eslint",
+    "@nuxt/test-utils/module",
+    "@pinia/nuxt",
+    "pinia-plugin-persistedstate/nuxt",
+    "@vueuse/nuxt",
+  ],
   ssr: true,
   devtools: { enabled: true },
   app: {
@@ -14,8 +21,10 @@ export default defineNuxtConfig({
     }
   },
   css: [
+    "@/assets/styles/layers.css",
     "vuetify/styles",
     "@/assets/styles/tailwind.css",
+    "@/assets/styles/utilities.scss",
   ],
   runtimeConfig: {
     tmdbAccessToken: "",
@@ -25,7 +34,18 @@ export default defineNuxtConfig({
   },
   compatibilityDate: "2025-07-15",
   vite: {
-    plugins: [vuetify({ autoImport: true })],
+    plugins: [vuetify({
+      autoImport: true
+    })],
+    optimizeDeps: {
+      include: [
+        "date-fns",
+        "date-fns/locale",
+      ]
+    },
+    ssr: {
+      noExternal: ["vuetify"],
+    },
     vue: {
       template: {
         transformAssetUrls,
@@ -37,7 +57,6 @@ export default defineNuxtConfig({
       "@tailwindcss/postcss": {},
     },
   },
-
   a11y: {
     enabled: true,
     defaultHighlight: true,

@@ -14,9 +14,7 @@
   </v-app-bar>
 
   <v-main>
-    <v-container>
-      <slot />
-    </v-container>
+    <slot />
   </v-main>
 </template>
 
