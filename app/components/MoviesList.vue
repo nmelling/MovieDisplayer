@@ -46,6 +46,7 @@ function onLoad(e: LoadEvent) {
         <v-icon
           icon="mdi-open-in-new"
           size="large"
+          class="hover-scale"
         />
       </template>
     </v-list-item>

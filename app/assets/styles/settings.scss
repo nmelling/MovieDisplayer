@@ -1,6 +1,50 @@
 @use 'vuetify/settings' with (
   $color-pack: false,
-  $utilities: false,
+  $utilities: (
+    "fill-height": (
+      property: height,
+      class: fill,
+      values: (
+        height: 100%
+      )
+    ),
+    "height": (
+      property: height,
+      responsive: true,
+      class: h,
+      values: (
+        auto: auto,
+        screen: 100vh,
+        0: 0,
+        25: 25%,
+        50: 50%,
+        75: 75%,
+        100: 100%
+      )
+    ),
+    "height-screen": (
+      property: height,
+      class: h,
+      values: (
+        screen: 100dvh
+      )
+    ),
+    "width": (
+      property: width,
+      responsive: true,
+      class: w,
+      values: (
+        auto: auto,
+        0: 0,
+        25: 25%,
+        33: 33%,
+        50: 50%,
+        66: 66%,
+        75: 75%,
+        100: 100%
+      )
+    )
+  ),
   $grid-breakpoints: (
       // repeated in tailwind.css and vuetify config
       'xs': 0,
