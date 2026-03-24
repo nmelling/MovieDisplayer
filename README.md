@@ -53,10 +53,12 @@ Il s'agit d'une version trop vieille de node (v: 20.18.0). **Erreur corrigée en
   - Je ne suis pas familier avec les tests de composants (je n'en ai jamais réaliser): Il me faut donc creuser ce point pour apprendre.
   - Pour les tests e2e, mise en place potentielle de `Playwright` comme sur d'autres projets ? Solution à creuser pour voir si compatible avec `Vitest`.
 
-## Pre commit
+## Pipeline Git
 
 1) Mise en place d'un `hook de pre-commit` avec `husky` et `lint-staged`. Le hook lint automatiquement le code au commit et vérifie les erreurs Typescript à la compilation. Le commit est bloqué si des erreurs sont relevées.
   - **Amélioration à prévoir** : Un lint à la sauvegarde de fichier + un log de la compilation Typescript en hot-reload afin d'être prévenu en temps réel des erreurs potentielles et des endroits du code qui pourraient être cassés suite à modification
+2) A faire: Mise en place de protection des branches
+3) A faire: Pipeline CI/CD avec vérification des tests
 
 ## Utilisation de l'IA
 
