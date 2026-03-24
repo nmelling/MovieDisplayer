@@ -10,6 +10,10 @@ export const useMovieCommentsStore = defineStore("movie-comments", () => {
     });
   }
 
+  // Dans l'idéal (même si ici c'est pour simuler un système de persistence de données)
+  // Il faudrait parser les commentaires avec un validateur type Zod pour s'assurer
+  // de la cohérence des données en sortie
+  //
   const commentsByMovie = (movieId: number) =>
     computed(() =>
       storedComments.value

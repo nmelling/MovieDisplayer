@@ -38,6 +38,7 @@ export function useMovieCommentForm() {
     form.value = makeBlankForm();
   }
 
+  // Helper pour faciliter l'affichage des erreurs sous forme de string
   function getErrorMessages(key: keyof MovieCommentForm) {
     return (v$.value[key].$errors ?? [])
       .map(e => e.$message)
