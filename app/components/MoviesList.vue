@@ -59,7 +59,7 @@ const skeletonRows = computed(() => {
   >
     <v-infinite-scroll
       ref="InfiniteScrollRef"
-      empty-text=""
+      :empty-text="skeletonRows.length === 0 ? 'Aucun résultat supplémentaire' : ''"
       @load="onLoad"
     >
       <v-list-item
