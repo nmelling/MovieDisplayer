@@ -36,8 +36,8 @@ watch(searchQuery, debouncedSetSearch);
 </script>
 
 <template>
-  <v-container class="min-h-dvh flex flex-col">
-    <header class="sticky-header  bg-white">
+  <v-container class="h-100 d-flex flex-column pa-0">
+    <header class="bg-white flex-shrink-0">
       <div class="flex items-center justify-center">
         <h1 class="mx-2">
           Liste des films
@@ -57,13 +57,13 @@ watch(searchQuery, debouncedSetSearch);
         clearable
       />
     </header>
-    <v-container class="flex-1 overflow-y-auto ">
+    <div class="flex-grow-1 overflow-y-auto">
       <MoviesList
         :movies="movies"
         :error="error"
         @fetch-requested="onFetchRequested"
       />
-    </v-container>
+    </div>
   </v-container>
 </template>
 
