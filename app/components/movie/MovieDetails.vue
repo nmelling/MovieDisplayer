@@ -22,8 +22,8 @@ defineProps<{
             {{ movie.title }}
           </h1>
 
-          <section class="flex flex-wrap gap-2">
-            <div class="flex flex-wrap gap-2 text-sm opacity-80">
+          <section class="flex flex-wrap tgap-2">
+            <div class="flex flex-wrap tgap-2 text-sm opacity-80">
               <span>{{ formatDate(movie.release_date) }}</span>
               <span>•</span>
               <span>{{ movie.runtime }} min</span>
@@ -33,7 +33,7 @@ defineProps<{
             </div>
           </section>
 
-          <section class="flex flex-wrap gap-2">
+          <section class="flex flex-wrap tgap-2">
             <v-chip
               v-for="genre in movie.genres"
               :key="genre.id"
@@ -44,7 +44,7 @@ defineProps<{
             </v-chip>
           </section>
 
-          <section class="flex items-center gap-2 mb-5">
+          <section class="flex items-center tgap-2 mb-5">
             <v-rating
               :model-value="movie.vote_average / 2"
               half-increments
@@ -77,7 +77,7 @@ defineProps<{
         Acteurs
       </h2>
       <div
-        class="overflow-x-auto flex flex-nowrap gap-2"
+        class="overflow-x-auto flex flex-nowrap tgap-2"
         tabindex="0"
       >
         <v-card
