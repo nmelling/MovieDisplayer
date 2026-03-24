@@ -79,13 +79,15 @@ const skeletonRows = computed(() => {
           <v-avatar size="x-large">
             <v-img
               :alt="`${movie.title}_poster_img`"
+              :lazy-src="formatSrcImg(movie.poster_path)"
               :src="formatSrcImg(movie.poster_path)"
             />
           </v-avatar>
         </template>
         <template #subtitle>
           <span
-            class="text-on-surface-variant text-body-2"
+            class="text-body-2"
+            :class="index % 2 === 0 ? 'text-white' : 'text-gray-800'"
           >
             {{ formatDate(movie.release_date) }}
           </span>
