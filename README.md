@@ -30,6 +30,7 @@
 2) Choix du SSR pour un chargement des pages très rapide avec des images pré-chargées.
 3) Utilisation du paquet `tmdb-ts` afin de requêter facilement l'API et avoir un typage propre.
 4) J'ai priorisé l'implémentation de feature et la découverte des concepts plutôt que la jolification de l'app. L'application reste à minima responsive.
+5) Découverte de l'outil `a11y` pour respect des bonnes pratiques concernant l'accessibilité.
 
 ## Vuetify & Tailwindcss & SCSS
 
