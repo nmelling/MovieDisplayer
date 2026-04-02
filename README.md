@@ -13,6 +13,10 @@
 
 # Commandes utiles
 
+- `bun run bun:build-cli`: Crée une CLI utilisable au sein du projet pour réaliser diverses actions spécifiques.
+- `bun run bun:clean`: Nettoie les dossiers d'install du repo.
+- `bun run bun:init`: Lance l'init du repo avec toutes les tâches necessaires pour son démarrage.
+- `bun run bun:reset`: Nettoie le repo puis l'init à nouveau afin de repartir facilement sur une base propre.
 - `bun install`
 - `bun run dev`: lance le serveur sur `http://localhost:3000`
 - `bun run test`: lance les tests `vitest`. S'assurer que la version de `node` est récente.
