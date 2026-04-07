@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
+  "bin": {
+    "project-cli": "./dist/project-cli"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -11,7 +14,11 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "prepare": "husky",
-    "test": "vitest"
+    "test": "vitest",
+    "bun:build-cli": "rm -rf ./dist && bun build ./setup/commands.ts --compile --outfile ./dist/project-cli && bun link",
+    "bun:clean": "project-cli clean-install",
+    "bun:init": "project-cli init-install",
+    "bun:reset": "project-cli clean-install && project-cli init-install"
   },
   "lint-staged": {
     "*.{js,mjs,ts,vue}": [
@@ -20,7 +27,6 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
-
     "@nuxt/eslint": "1.15.2",
     "@nuxtjs/tailwindcss": "6.14.0",
     "@pinia/nuxt": "0.11.3",
@@ -44,6 +50,7 @@
     "@tailwindcss/postcss": "^4.2.2",
     "@types/node": "^25.5.0",
     "@vue/test-utils": "^2.4.6",
+    "commander": "^14.0.3",
     "happy-dom": "^20.8.4",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
