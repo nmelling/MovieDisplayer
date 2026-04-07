@@ -110,6 +110,7 @@ const skeletonRows = computed(() => {
       />
       <template #loading>
         <v-progress-circular
+          v-if="skeletonRows.length === 0"
           indeterminate
           aria-label="Chargement des éléments"
         />

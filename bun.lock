@@ -29,6 +29,7 @@
         "@tailwindcss/postcss": "^4.2.2",
         "@types/node": "^25.5.0",
         "@vue/test-utils": "^2.4.6",
+        "commander": "^14.0.3",
         "happy-dom": "^20.8.4",
         "husky": "^9.1.7",
         "lint-staged": "^16.4.0",
